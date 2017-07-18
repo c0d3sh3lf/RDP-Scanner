@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
 __author__ = "Sumit Shrivastava"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __description__ = """
 Author: Sumit Shrivasava
-Version 1.0.0
+Version 1.0.1
 
 RDP Scanner
 
@@ -17,6 +17,12 @@ Dependencies:
  - nmap
 """
 
+__update_log__ = """
+Version 1.0.1
+* Removed -A from the nmap command
+"""
+
+
 import xml.dom.minidom
 import optparse, sys, subprocess, re, os
 
@@ -27,7 +33,7 @@ status_dict = {}
 
 def check_rdp(ip_addr):
     try:
-        nmap_command = "nmap -sV -Pn -n -p3389 --script=rdp-enum-encryption -A -vv -oX output.xml " + str(ip_addr).strip()
+        nmap_command = "nmap -sV -Pn -n -p3389 --script=rdp-enum-encryption -vv -oX output.xml " + str(ip_addr).strip()
         nmap_process = subprocess.Popen(nmap_command, stdout=subprocess.PIPE, shell=True)
         nmap_process.communicate()
         parse_output()
